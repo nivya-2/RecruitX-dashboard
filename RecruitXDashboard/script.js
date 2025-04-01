@@ -202,7 +202,7 @@ const jobPostings = async () => {
           row.addEventListener("click", function () { // Use a regular function to access 'this'
             const rowData = jobTable.getRow(this).getData();
             const jobId = rowData.id;
-            const detailPageURL = `card.html?jobId=${jobId}`;
+            const detailPageURL = `candidates.html?jobId=${jobId}`;
             window.location.href = detailPageURL;
           });
         });
