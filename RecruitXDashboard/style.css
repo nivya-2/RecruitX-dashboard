@@ -111,5 +111,166 @@ footer .footer-link:hover {
     opacity: 1;
   }
 }
+.job-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.job-container__header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.job-container__heading {
+  color: #FCB334;
+  font-size: 2rem;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  display: none;
+}
+.loading-indicator__spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(252, 179, 52, 0.2);
+  border-radius: 50%;
+  border-top-color: #FCB334;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 15px;
+}
+.loading-indicator__text {
+  color: #333;
+  font-size: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.error-message {
+  text-align: center;
+  padding: 30px;
+  border-radius: 6px;
+  background-color: rgb(254.5849056604, 247.9056603774, 247.4150943396);
+  margin: 20px 0;
+  display: none;
+}
+.error-message__text {
+  color: #f44336;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.filter-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.filter-section__search-input, .filter-section__location-filter, .filter-section__du-filter {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #1EBBF0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.filter-section__search-input:focus, .filter-section__location-filter:focus, .filter-section__du-filter:focus {
+  outline: none;
+  border-color: #FCB334;
+}
+
+.job-table {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-color: #1EBBF0 !important;
+}
+.job-table .tabulator-header {
+  background-color: #FCB334;
+  color: white;
+  border-bottom: none;
+}
+.job-table .tabulator-header .tabulator-col {
+  border-right: 1px solid rgba(255, 255, 255, 0.103);
+  font-weight: normal;
+  padding: 12px;
+  background-color: #FCB334 !important;
+}
+.job-table .tabulator-header .tabulator-col .tabulator-col-title {
+  font-weight: 600;
+}
+.job-table .tabulator-header .tabulator-col .tabulator-col-sorter .tabulator-arrow {
+  border-bottom-color: white !important;
+  border-top-color: white !important;
+}
+.job-table .tabulator-header .tabulator-col .tabulator-col-sorter .tabulator-arrow.asc {
+  border-bottom-color: white !important;
+}
+.job-table .tabulator-header .tabulator-col .tabulator-col-sorter .tabulator-arrow.desc {
+  border-top-color: white !important;
+}
+.job-table .tabulator-row {
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+.job-table .tabulator-row:nth-child(even) {
+  background-color: #f8f9fa;
+}
+.job-table .tabulator-row:hover {
+  background-color: #FFE6BB !important;
+}
+.job-table .tabulator-row .tabulator-cell {
+  padding: 12px;
+  border-right: 1px solid #1EBBF0;
+}
+.job-table .tabulator-row .badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.9em;
+}
+.job-table .tabulator-row .badge--primary {
+  background-color: #FFE6BB;
+  color: #FCB334;
+}
+.job-table .tabulator-row .badge--info {
+  background-color: #FFE6BB;
+  color: #FCB334;
+}
+.job-table .tabulator-footer {
+  border-top: 1px solid #1EBBF0 !important;
+  background-color: #f9f9f9 !important;
+  padding: 10px;
+}
+
+.tabulator-page {
+  margin: 0 2px;
+  border: 1px solid #1EBBF0 !important;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #FCB334 !important;
+  color: #333 !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tabulator-page.active {
+  background-color: #FCB334 !important;
+  color: #1EBBF0 !important;
+  border-color: #FCB334 !important;
+}
+.tabulator-page:hover {
+  background-color: #FFE6BB !important;
+}
 
 /*# sourceMappingURL=style.css.map */
