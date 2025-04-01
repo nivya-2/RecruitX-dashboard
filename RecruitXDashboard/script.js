@@ -6,7 +6,7 @@ function switchTab() {
     const tabs = document.querySelectorAll(".tab");
     const tabContainer = document.querySelector(".tab-container");
     const articleContainer = document.querySelector(".article-container");
-
+    const footerContainer = document.querySelector("footer");
     const primaryBlue = "#1EBBF0";
     const secondaryBlue = "#C8EAFF";
     const primaryOrange = "#FCB334";
@@ -31,13 +31,15 @@ function switchTab() {
             body: "#ffffff",
             tabBg: secondaryBlue,
             articleContainerBg: secondaryBlue,
-            activeTabBg: primaryBlue
+            activeTabBg: primaryBlue,
+            footerContainerBg: primaryBlue
         },
         jobPostings: {
             body: "#ffffff",
             tabBg: secondaryOrange,
             articleContainerBg: secondaryOrange,
-            activeTabBg: primaryOrange
+            activeTabBg: primaryOrange,
+            footerContainerBg: primaryOrange
         }
     };
 
@@ -48,7 +50,7 @@ function switchTab() {
     tabContainer.style.backgroundColor = activeTheme.tabBg;
     articleContainer.style.backgroundColor = activeTheme.articleContainerBg;
     articleContainer.style.transition = "background-color 0.5s ease-in-out";
-
+    footerContainer.style.backgroundColor = activeTheme.footerContainerBg;
     // Set active tab background color
     activeTab.style.backgroundColor = activeTheme.activeTabBg;
 
@@ -72,9 +74,7 @@ const jobPostings = async () => {
     const locationFilterElement = document.getElementById("location-filter");
     const duFilterElement = document.getElementById("du-filter");
   
-    // Firebase URL constant
-    const FIREBASE_URL =
-      "https://recruitmentanalyticsdashboard-default-rtdb.firebaseio.com/";
+  
   
     // Table initialization variable
     let jobTable;
@@ -82,7 +82,7 @@ const jobPostings = async () => {
     // Initialize UI state: show loading, hide error
     errorMessageElement.style.display = "none";
     loadingIndicatorElement.style.display = "flex";
-  
+    // await new Promise(resolve => setTimeout(resolve, 1000))
     /**
      * Retrieves job data from Firebase, filters it, and initializes the table.
      */
@@ -91,7 +91,7 @@ const jobPostings = async () => {
         loadingIndicatorElement.style.display = "flex";
         errorMessageElement.style.display = "none";
   
-        const response = await axios.get(`${FIREBASE_URL}jobPostings.json`);
+        const response = await axios.get(`${FIREBASE_DB_URL}/jobPostings.json`);
   
         // Data transformation and filtering
         const jobsData = response.data
@@ -193,13 +193,15 @@ const jobPostings = async () => {
               `<span class="badge badge--info">${cell.getValue()}</span>`,
           },
         ],
+    
       });
   
-      // Add click event to rows for navigation
+      //Add click event to rows for navigation
       jobTable.on("tableBuilt", () => {
         const rows = jobTable.element.querySelectorAll(".tabulator-row");
         rows.forEach((row) => {
           row.addEventListener("click", function () { // Use a regular function to access 'this'
+            console.log("Row clicked:", this);
             const rowData = jobTable.getRow(this).getData();
             const jobId = rowData.id;
             const detailPageURL = `candidates.html?jobId=${jobId}`;
