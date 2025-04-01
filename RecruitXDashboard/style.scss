@@ -4,7 +4,11 @@ $primary-orange: #FCB334;
 $secondary-orange: #FFE6BB;
 $border: 0.4vw;
 
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .dashboard {
     &__header {
         display: flex;
@@ -81,3 +85,48 @@ $border: 0.4vw;
 .hidden {
     display: none !important;
 }
+
+footer {
+    width: 100%;
+    background-color: $primary-blue;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    box-sizing: border-box;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1.5s ease-in-out;
+  
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+  
+    .footer-text {
+        font-size: 14px;
+        opacity: 0.7;
+    }
+  
+    .footer-links {
+        display: flex;
+        gap: 15px;
+    }
+  
+    .footer-link {
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        transition: color 0.3s ease-in-out;
+    
+        &:hover {
+            color: #f8b400;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
