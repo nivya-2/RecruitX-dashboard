@@ -366,7 +366,8 @@ $error-color: #f44336;
 }
 
 .export-buttons {
-    margin-top: 2vh;
+    margin-top: -1vh;
+    margin-right: 10vh;
     display: flex;
     gap: 1vw;
     justify-content: flex-end;
@@ -376,11 +377,11 @@ $error-color: #f44336;
     background-color: #28a745;
     color: #fff;
     border: none;
-    padding: 1vh 1.5vw;
+    padding: 1.5vh 1.5vw;
     border-radius: 1vmin;
     cursor: pointer;
     transition: background 0.3s;
-    font-size: 1.5vmin;
+    font-size: 1.7vmin;
 }
 
 .export-buttons button:hover {
@@ -497,7 +498,7 @@ $error-color: #f44336;
  
     &.active {
         background-color: $primary-orange !important; ;
-        color:$border-color !important; ;
+        color:$primary-blue !important; ;
         border-color: $primary-orange    !important; ;
     }
     &:hover {
@@ -518,13 +519,15 @@ $error-color: #f44336;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
-      margin-right: 10px;
+    //   margin-left: 30vh;
+    margin-top: 1.5vh;
     }
     
     .btn-primary {
       background-color: #4a6cf7;
       color: white;
       border: none;
+      margin-left: 150vh;
       
       &:hover {
         background-color: #3a5cd7;
@@ -535,6 +538,7 @@ $error-color: #f44336;
       background-color: #f0f0f0;
       color: #333;
       border: 1px solid #ddd;
+      
       
       &:hover {
         background-color: #e0e0e0;
