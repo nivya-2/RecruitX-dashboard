@@ -55,7 +55,6 @@
 .article-container {
   background-color: #C8EAFF;
   border-radius: 0.4vw;
-  height: 100vh;
   padding: 2%;
 }
 .article-container__section {
@@ -111,16 +110,16 @@ footer .footer-link:hover {
     opacity: 1;
   }
 }
-.funnel-sources__container {
+.funnel-chart__card {
   position: relative;
   background: white;
   padding: 1.25rem;
   border-radius: 0.625rem;
   text-align: center;
   width: 30vw;
-  height: 30vw;
   padding: 2% 5%;
   border: 0.5px solid #FCB334;
+  margin-bottom: 5%;
 }
 
 .funnel-chart__heading {
@@ -265,6 +264,103 @@ footer .footer-link:hover {
   font-size: 1rem;
   cursor: pointer;
   flex: 1;
+}
+
+#filterExport {
+  margin-bottom: 2%;
+  display: flex;
+}
+
+.metric {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8vh 3vw;
+  padding: 2vh 3vw;
+  width: 18vw;
+  height: 9vh;
+  background-color: #fff;
+  border-left: 0.4vw solid #FCB334;
+  border-radius: 1vh;
+  border-bottom: 0.1vw solid #FCB334;
+  border-top: 0.1vw solid #FCB334;
+  border-right: 0.1vw solid #FCB334;
+  transition: border-color 0.3s ease;
+}
+.metric:hover {
+  border-left: 0.4vw solid #1EBBF0;
+}
+.metric__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(51, 51, 51);
+}
+.metric__number {
+  font-size: 4vh;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.metric__text {
+  font-size: 2.6vh;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.datametricCharts {
+  display: flex;
+}
+
+.charts {
+  padding-top: 3%;
+  display: flex;
+  gap: 5%;
+}
+
+#genderChartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16.47rem;
+  height: 12.99rem;
+}
+
+.application-sources-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gender-hireday-age__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+}
+
+.funnel-sources__container {
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.gender-chart__card {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #FCB334;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.applications-chart__card {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #FCB334;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <title>Recruitment Analytics Dashboard</title>
 </head>
+
 <body>
     <header class="dashboard__header">
         <div id="header-section-title" class="dashboard__title">RecruitX</div>
@@ -32,96 +34,189 @@
                         </select>
                     </div>
                 </div>
-                <div>
+
+                <div class="datametricCharts">
                     <div class="data-metrics">
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Total Hired
+                                </div>
+                                <div class="metric__number" id="totalHired">
 
-                    </div>
-                    <div class="funnel-sources__container">
-                        <div class="funnel-chart__heading">
-                            <p>Recruitment Funnel: <br>Hiring Success Rate by Stage </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="funnel-chart__container">
-                            <div class="width-line-initial">
-                                <p>100%</p>
-                                <div class="vertical-lines"></div>
-                                <div class="horizontal-line"></div>
-                            </div>
-                            <div class="funnel-chart-data">
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Application Recieved
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar applications-recieved "></div>
-                                    </div>
+
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Open Positions
                                 </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Applications screened
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar applications-screened"></div>
-                                    </div>
-                                </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Technical Round Completed
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar technical-round"></div>
-                                    </div>
-                                </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Management Round Completed
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar management-round"></div>
-                                    </div>
-                                </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Documents Collected
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar documents-collected"></div>
-                                    </div>
-                                </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Salary Approved
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar salary-approved"></div>
-                                    </div>
-                                </div>
-                
-                                <div class="data-container">
-                                    <div class="data-heading">
-                                        Offer Accepted
-                                    </div>
-                                    <div class="graph-container">
-                                        <div class="graph-bar offer-accepted"></div>
-                                    </div>
+                                <div class="metric__number" id="openPositions">
+
                                 </div>
                             </div>
-                            <div class="width-line-final">
-                                <div class="vertical-lines"></div>
-                                <div class="horizontal-line"></div>
-                                <p></p>
+                        </div>
+
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Closed Postions
+                                </div>
+                                <div class="metric__number" id="closedPositions">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Avg. Aplts per job
+                                </div>
+                                <div class="metric__number" id="applicationsPerHire">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Avg. Time to hire
+                                </div>
+                                <div class="metric__number" id="daysPerHire">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Offer Accept
+                                </div>
+                                <div class="metric__number" id="offerAcceptanceRate">
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="gender-hireday-age__container">
+                    <div class="charts">
+                        <div class="funnel-sources__container">
+                            <div class="funnel-chart__card">
+
+                                <div class="funnel-chart__heading">
+                                    <p>Recruitment Funnel: <br>Hiring Success Rate by Stage </p>
+                                </div>
+                                <div class="funnel-chart__container">
+                                    <div class="width-line-initial">
+                                        <p>100%</p>
+                                        <div class="vertical-lines"></div>
+                                        <div class="horizontal-line"></div>
+                                    </div>
+                                    <div class="funnel-chart-data">
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Application Recieved
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar applications-recieved "></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Applications screened
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar applications-screened"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Technical Round Completed
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar technical-round"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Management Round Completed
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar management-round"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Documents Collected
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar documents-collected"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Salary Approved
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar salary-approved"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Offer Accepted
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar offer-accepted"></div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="width-line-final">
+                                    <div class="vertical-lines"></div>
+                                    <div class="horizontal-line"></div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        
+                            <div class="application-sources-container applications-chart__card">
+                                <h2 class="chart-title">Application Sources</h2>
+                                <canvas id="applicationsChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="gender-hireday-age__container">
+                            <div class="gender-chart-container gender-chart__card">
+                                <h2 class="chart-title">Gender Ratio</h2>
+                                <canvas id="genderChart"></canvas>
+                            </div>
+
+                            <div class="gender-chart-container gender-chart__card">
+                                <h2 class="chart-title">Gender Ratio</h2>
+                                <canvas id="genderChart"></canvas>
+                            </div>
+                            <div class="gender-chart-container gender-chart__card">
+                                <h2 class="chart-title">Gender Ratio</h2>
+                                <canvas id="genderChart"></canvas>
+                            </div>
+
+
+<!-- 
+                            <canvas id="barChartDuration"></canvas>
+                            <canvas id="barChartAge"></canvas> -->
+                        </div>
+
+
 
                     </div>
+                    
                 </div>
-                
+
             </div>
 
             <div id="jobPostings" class="hidden job__container">
@@ -141,5 +236,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="jins.js"></script>
+
 </body>
+
 </html>
