@@ -5,10 +5,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <!-- Tabulator CSS -->
+    <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Recruitment Analytics Dashboard</title>
 </head>
 <body>
+    <div class="candidate-summary-header">
+        <h2>Candidates Summary</h2>
+        
+        <button class="close-button">&times;</button>
+    </div>
+    <div class="filter-controls">
+        <button id="advanced-filter-btn" class="btn-primary">Advanced Filters</button>
+        <button id="clear-filters-btn" class="btn-secondary">Clear All Filters</button>
+        <span id="active-filters-count" class="filter-badge hidden">0</span>
+      </div>
+    <div class="table-container">
+        <div id="candidate-table"></div>
+
+        <div class="error-message" id="error-msg">
+          <p class="error-message__text">No Result Found.</p>
+        </div>
+    </div>
+    <div class="export-buttons">
+        <button id="export-csv">Export CSV</button>
+        <button id="export-json">Export JSON</button>
+        <button id="export-xlsx">Export Excel</button>
+        <button id="export-pdf">Export PDF</button>
+    </div>
+    <div id="filter-modal" class="filter-modal">
+        <div class="filter-modal-content">
+          <div class="filter-modal-header">
+            <h3>Complex Filtering</h3>
+            <button class="close-modal-button">&times;</button>
+          </div>
+          
+          <div class="filter-modal-body">
+            <div class="filter-sections">
+              <!-- Basic Information Section -->
+              <div class="filter-section">
+                <h4>Basic Data</h4>
+                <div class="filter-row">
+                  <div class="filter-group">
+                    <label for="filter-name">Candidate Name</label>
+                    <input type="text" id="filter-name" placeholder="Search by name">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="filter-id">Candidate ID</label>
+                    <input type="text" id="filter-id" placeholder="Enter ID">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Age Range Section -->
+              <div class="filter-section">
+                <h4>Age Range</h4>
+                <div class="filter-row">
+                  <div class="filter-group">
+                    <label for="filter-age-min">Minimum Age</label>
+                    <input type="number" id="filter-age-min" min="18" max="70" placeholder="Min">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="filter-age-max">Maximum Age</label>
+                    <input type="number" id="filter-age-max" min="18" max="70" placeholder="Max">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Experience Section -->
+              <div class="filter-section">
+                <h4>Experience</h4>
+                <div class="filter-row">
+                  <div class="filter-group">
+                    <label for="filter-exp-min">Minimum Years</label>
+                    <input type="number" id="filter-exp-min" min="0" max="40" placeholder="Min">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="filter-exp-max">Maximum Years</label>
+                    <input type="number" id="filter-exp-max" min="0" max="40" placeholder="Max">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Application Date Section -->
+              <div class="filter-section">
+                <h4>Application Date</h4>
+                <div class="filter-row">
+                  <div class="filter-group">
+                    <label for="filter-date-from">From</label>
+                    <input type="date" id="filter-date-from">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="filter-date-to">To</label>
+                    <input type="date" id="filter-date-to">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Source Section -->
+              <div class="filter-section">
+                <h4>Candidate Source</h4>
+                <div class="filter-row source-checkboxes">
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="source-linkedin" value="LinkedIn">
+                    <label for="source-linkedin">LinkedIn</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="source-indeed" value="Indeed">
+                    <label for="source-indeed">Indeed</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="source-referral" value="Referral">
+                    <label for="source-referral">Referral</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="source-direct" value="Direct">
+                    <label for="source-direct">Direct Application</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="source-other" value="Other">
+                    <label for="source-other">Other</label>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Application Status Section -->
+              <div class="filter-section">
+                <h4>Application Status</h4>
+                <div class="filter-row status-checkboxes">
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-received" value="Applications Received">
+                    <label for="status-received">Applications Received</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-screened" value="Applications Screened">
+                    <label for="status-screened">Applications Screened</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-documents" value="Documents collected">
+                    <label for="status-documents">Documents collected</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-technical" value="Technical Interview Completed">
+                    <label for="status-technical">Technical Interview Completed</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-management" value="Management Interview Completed">
+                    <label for="status-management">Management Interview Completed</label>
+                  </div>
+                  
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="status-salary" value="Salary approved">
+                    <label for="status-salary">Salary approved</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="filter-modal-footer">
+            <button id="apply-filters-btn" class="btn-primary">Apply Filters</button>
+            <button id="reset-filters-btn" class="btn-secondary">Reset</button>
+          </div>
+        </div>
+      </div>
+    <!-- Tabulator JS -->
+    <script src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

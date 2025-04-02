@@ -3,6 +3,8 @@ $secondary-blue: #C8EAFF;
 $primary-orange: #FCB334;
 $secondary-orange: #FFE6BB;
 $border: 0.4vw;
+$background-color: #f5f5f5;
+$text-color: #333;
 
 *{
     margin: 0;
@@ -334,3 +336,420 @@ $error-color: #f44336;
         background-color: $secondary-orange !important;
     }
 }
+
+.candidate-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-orange;
+    color: #fff;
+    padding: 2vh 2vw;
+    border-radius: 1vmin;
+    font-size: 2.5vmin;
+}
+
+.close-button {
+    background: none;
+    border: black;
+    color: #fff;
+    font-size: 6vmin;
+    cursor: pointer;
+}
+
+.table-container {
+    margin-top: 3vh;
+    background: #fff;
+    padding: 3vh 3vw;
+    border-radius: 2vmin;
+    box-shadow: 0px 0.5vh 1.5vh rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.export-buttons {
+    margin-top: -1vh;
+    margin-right: 10vh;
+    display: flex;
+    gap: 1vw;
+    justify-content: flex-end;
+}
+
+.export-buttons button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 1.5vh 1.5vw;
+    border-radius: 1vmin;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1.7vmin;
+}
+
+.export-buttons button:hover {
+    background-color: #218838;
+}
+
+/* Table Container (Adjusting Size) */
+.table-container {
+    width: 90vw;  /* Adjusts to 90% of the viewport width */
+    height: 70vh; /* Adjusts to 70% of the viewport height */
+    margin: 3vh auto; /* Center the table */
+    padding: 3vh 2vw;
+    background: #fff;
+    border-radius: 1.5vh;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden; /* Ensures no overflow */
+}
+
+.tabulator {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ 
+    .tabulator-header {
+        background-color: $primary-orange;
+        color: white;
+        border-bottom: none;
+ 
+        .tabulator-col {
+            border-right: 1px solid rgba(255, 255, 255, 0.103);
+            font-weight: normal;
+            padding: 12px;
+            background-color: $primary-orange !important;
+           
+           
+            .tabulator-col-title {
+                font-weight: 600;
+            }
+ 
+            .tabulator-col-sorter {
+                .tabulator-arrow {
+                    border-bottom-color: white !important; // Change arrow color
+                    border-top-color: white !important;   // Change arrow color
+                   
+                    // Optional: Change arrow color when sorted
+                    &.asc {
+                        border-bottom-color: white !important;
+                    }
+                    &.desc {
+                        border-top-color: white !important;
+                    }
+                }
+            }
+ 
+        }
+    }
+ 
+    .tabulator-row {
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+ 
+        &:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+ 
+        &:hover {
+            background-color: $secondary-orange !important;
+        }
+ 
+        .tabulator-cell {
+            padding: 12px;
+            border-right: 1px solid $primary-blue;
+        }
+ 
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+ 
+            &-primary {
+                background-color: lighten($primary-orange, 40%);
+                color: darken($primary-orange, 20%);
+            }
+ 
+            &-info {
+                background-color: $secondary-orange;
+                color: $primary-orange;
+            }
+        }
+    }
+ 
+    .tabulator-footer {
+        border-top: 1px solid $primary-blue;
+        background-color: #f9f9f9;
+        padding: 10px;
+    }
+}
+ 
+// Pagination Controls
+.tabulator-page {
+    margin: 0 2px;
+    border: 1px solid $primary-blue !important; ;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: $primary-orange !important; ;
+    color: $text-color !important; ;
+    cursor: pointer;
+    transition: all 0.3s ease;
+ 
+    &.active {
+        background-color: $primary-orange !important; ;
+        color:$primary-blue !important; ;
+        border-color: $primary-orange    !important; ;
+    }
+    &:hover {
+        background-color: $secondary-orange !important;
+       
+    }
+   
+}
+// Advanced Filter Styles
+.filter-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    
+    .btn-primary, .btn-secondary {
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    //   margin-left: 30vh;
+    margin-top: 1.5vh;
+    }
+    
+    .btn-primary {
+      background-color: #4a6cf7;
+      color: white;
+      border: none;
+      margin-left: 150vh;
+      
+      &:hover {
+        background-color: #3a5cd7;
+      }
+    }
+    
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+      
+      
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+    
+    .filter-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+      
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+  
+  // Modal Styles
+  .filter-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px); /* Adds blur effect to background */
+    -webkit-backdrop-filter: blur(5px); /* For Safari support */
+    
+    &.show {
+      display: block;
+      animation: fadeIn 0.3s;
+    }
+    
+    .filter-modal-content {
+      background-color: #fff;
+      margin: 50px auto;
+      padding: 0;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      width: 800px;
+      max-width: 90%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      
+      @media (max-width: 768px) {
+        width: 95%;
+        margin: 20px auto;
+      }
+    }
+    
+    .filter-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      
+      h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+      }
+      
+      .close-modal-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #888;
+        
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+    
+    .filter-modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: calc(90vh - 130px);
+      
+      .filter-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .filter-section {
+        background-color: #f9f9f9;
+        border-radius: 6px;
+        padding: 15px;
+        
+        h4 {
+          margin-top: 0;
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: #444;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 8px;
+        }
+        
+        .filter-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 15px;
+          
+          @media (max-width: 576px) {
+            flex-direction: column;
+          }
+        }
+        
+        .filter-group {
+          flex: 1;
+          min-width: 200px;
+          
+          label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+          }
+          
+          input[type="text"],
+          input[type="number"],
+          input[type="date"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            
+            &:focus {
+              border-color: #4a6cf7;
+              outline: none;
+            }
+          }
+        }
+        
+        .source-checkboxes,
+        .status-checkboxes {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          
+          .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            min-width: 150px;
+            
+            input[type="checkbox"] {
+              margin-right: 5px;
+            }
+            
+            label {
+              font-size: 14px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+    
+    .filter-modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      
+      .btn-primary, .btn-secondary {
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .btn-primary {
+        background-color: #4a6cf7;
+        color: white;
+        border: none;
+        
+        &:hover {
+          background-color: #3a5cd7;
+        }
+      }
+      
+      .btn-secondary {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+        
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
