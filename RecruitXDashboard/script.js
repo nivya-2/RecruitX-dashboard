@@ -854,6 +854,9 @@ function applyFilters() {
   if (Object.keys(activeFilters).length > 0) {
     table.setFilter(customFilter);
     updateActiveFilterCount();
+    if (table.getDataCount("visible") === 0) {
+      displayNoResults();
+  }
   } else {
     // No filters selected
     document.getElementById('active-filters-count').classList.add('hidden');
