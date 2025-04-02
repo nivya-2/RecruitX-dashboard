@@ -402,7 +402,7 @@ $error-color: #f44336;
 }
 
 .tabulator {
-    border: none;
+    border: 1px solid $primary-blue !important;
     border-radius: 8px;
     overflow: hidden;
     background-color: white;
@@ -478,8 +478,8 @@ $error-color: #f44336;
     }
  
     .tabulator-footer {
-        border-top: 1px solid $primary-blue;
-        background-color: #f9f9f9;
+        border-top: 1px solid $primary-blue !important;
+        background-color: #f9f9f9 !important;
         padding: 10px;
     }
 }
@@ -524,13 +524,13 @@ $error-color: #f44336;
     }
     
     .btn-primary {
-      background-color: #4a6cf7;
-      color: white;
+      background-color: $primary-orange;
+      color: $text-color;
       border: none;
       margin-left: 150vh;
       
       &:hover {
-        background-color: #3a5cd7;
+        background-color: $secondary-orange;
       }
     }
     

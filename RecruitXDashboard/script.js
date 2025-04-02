@@ -289,7 +289,11 @@ function displayNoResults(){
   const errorMessage = document.getElementById("error-msg");
   errorMessage.style.display = "block";
 }
-
+function hideNoResults(){
+  const errorMessage = document.getElementById("error-msg");
+  errorMessage.style.display = "none";
+  console.log(123);
+}
 
 let table;
 let activeFilters = {};
@@ -440,19 +444,32 @@ function renderTabulator(candidates) {
 function setupExportButtons() {
   // CSV Export
   document.getElementById("export-csv").addEventListener("click", function () {
-    table.download("csv", "candidates_data.csv");
-  });
+    if (table.getData("active").length === 0) {
+        alert("No data available to export!");
+    } else {
+        table.download("csv", "candidates_data.csv");
+    }
+}); 
 
-  // JSON Export
-  document.getElementById("export-json").addEventListener("click", function () {
-    table.download("json", "candidates_data.json");
-  });
+// JSON Export
+document.getElementById("export-json").addEventListener("click", function () {
+    if (table.getData("active").length === 0) {
+        alert("No data available to export!");
+    } else {
+        table.download("json", "candidates_data.json");
+    }
+});
+
 
   // Excel Export
   document.getElementById("export-xlsx").addEventListener("click", function () {
     // For Excel export, we need to load the xlsx formatter
     loadXLSXFormatter().then(() => {
+      if (table.getData("active").length === 0) {
+        alert("No data available to export!");
+    } else {      
       table.download("xlsx", "candidates_data.xlsx", { sheetName: "Candidates" });
+  }
     }).catch(err => {
       console.error("Error loading XLSX formatter:", err);
       alert("Failed to load Excel export functionality. Please try again later.");
@@ -797,11 +814,13 @@ function restoreFilterValues() {
 }
 
 function collectFilterValues() {
+  hideNoResults();
   const filters = {};
 
   // Collect basic information
   const name = document.getElementById('filter-name').value.trim();
   if (name) filters.name = name;
+
 
   const id = document.getElementById('filter-id').value.trim();
   if (id) filters.id = id;
@@ -852,6 +871,7 @@ function applyFilters() {
   table.clearFilter();
 
   if (Object.keys(activeFilters).length > 0) {
+    hideNoResults();
     table.setFilter(customFilter);
     updateActiveFilterCount();
     if (table.getDataCount("visible") === 0) {
@@ -951,6 +971,7 @@ function customFilter(data) {
 }
 
 function resetFilters() {
+
   // Clear all filter inputs in the modal but don't apply
   document.getElementById('filter-name').value = '';
   document.getElementById('filter-id').value = '';
@@ -968,6 +989,7 @@ function resetFilters() {
 }
 
 function clearAllFilters() {
+  hideNoResults();
   // Clear all active filters and reset the table
   activeFilters = {};
   table.clearFilter();

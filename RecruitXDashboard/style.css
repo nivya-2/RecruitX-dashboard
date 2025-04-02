@@ -338,7 +338,7 @@ footer .footer-link:hover {
 }
 
 .tabulator {
-  border: none;
+  border: 1px solid #1EBBF0 !important;
   border-radius: 8px;
   overflow: hidden;
   background-color: white;
@@ -397,8 +397,8 @@ footer .footer-link:hover {
   color: #FCB334;
 }
 .tabulator .tabulator-footer {
-  border-top: 1px solid #1EBBF0;
-  background-color: #f9f9f9;
+  border-top: 1px solid #1EBBF0 !important;
+  background-color: #f9f9f9 !important;
   padding: 10px;
 }
 
@@ -436,13 +436,13 @@ footer .footer-link:hover {
   margin-top: 1.5vh;
 }
 .filter-controls .btn-primary {
-  background-color: #4a6cf7;
-  color: white;
+  background-color: #FCB334;
+  color: #333;
   border: none;
   margin-left: 150vh;
 }
 .filter-controls .btn-primary:hover {
-  background-color: #3a5cd7;
+  background-color: #FFE6BB;
 }
 .filter-controls .btn-secondary {
   background-color: #f0f0f0;
