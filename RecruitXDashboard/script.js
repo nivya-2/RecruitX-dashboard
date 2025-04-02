@@ -65,3 +65,112 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", () => switchTab(button));
     });
 });
+
+
+// Step 1: Data processing logic function
+const RecruitmentMetrics = (function() {
+  
+    function processData(data) {
+  
+      function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+      }
+  
+      const metrics = {
+        totalHired: 0,
+        openPositions: 0,
+        closedPositions: 0,
+        avgApplicationsPerJob: 0,
+        avgTimeToHire: 0,
+        offerAcceptanceRate: 0
+      };
+      let acceptedOffers = 0;
+      let totalOffers = 0;
+  
+      // Calculate total hired
+      Object.values(data.applications).forEach(app => {
+        if (app.application_status === "Offer accepted") {
+          metrics.totalHired++;
+        }
+        
+        if (app.application_status === "Offer accepted") {
+          acceptedOffers++;
+        }
+        if (app.hire_date !== "N/A") {
+            totalOffers++;
+        }
+      });
+  
+      // Calculate open and closed positions
+      Object.values(data.jobPostings).forEach(job => {
+        if (job.job_status === "Open") {
+          metrics.openPositions++;
+        } else if (job.job_status === "Closed") {
+          metrics.closedPositions++;
+        }
+      });
+  
+      // Calculate avg applications per job
+      const totalApplications = Object.keys(data.applications).length;
+      const totalJobs = Object.keys(data.jobPostings).length;
+      metrics.avgApplicationsPerJob = (totalApplications / totalJobs).toFixed(1);
+  
+      // Calculate avg time to hire
+      let totalHireDays = 0;
+      let hireCount = 0;
+      Object.values(data.applications).forEach(app => {
+        if (app.hire_date !== "N/A" && app.application_status === "Offer accepted") {
+          const applicationDate = new Date(app.application_date);
+          const hireDate = new Date(app.hire_date);
+          const timeToHire = Math.abs((hireDate - applicationDate) / (1000 * 60 * 60 * 24)); // in days
+          totalHireDays += timeToHire;
+          hireCount++;
+        }
+      });
+      metrics.avgTimeToHire = hireCount > 0 ? (totalHireDays / hireCount).toFixed(1) : 'N/A';
+  
+    metrics.offerAcceptanceRate = totalOffers > 0 ? ((acceptedOffers / totalOffers) * 100).toFixed(1) : "N/A";
+  
+  
+      return metrics;
+    }
+  
+    // Step 2: UI update logic
+    function update(metrics) {
+      document.getElementById('totalHired').textContent = metrics.totalHired;
+      document.getElementById('openPositions').textContent = metrics.openPositions;
+      document.getElementById('closedPositions').textContent = metrics.closedPositions;
+      document.getElementById('applicationsPerHire').textContent = metrics.avgApplicationsPerJob;
+      document.getElementById('daysPerHire').textContent = metrics.avgTimeToHire;
+  
+      const offerAcceptanceElement = document.getElementById("offerAcceptanceRate");
+      if (offerAcceptanceElement) {
+          offerAcceptanceElement.textContent = `${metrics.offerAcceptanceRate}`;
+      }
+  }
+  return {
+    init: async function() {
+      try {
+        const response = await axios.get(`${FIREBASE_DB_URL}/.json`);
+
+  
+        // Ensure response.data is not null or undefined
+        if (!response.data) {
+          console.error("No data received from Firebase.");
+          return;
+        }
+  
+        const metrics = processData(response.data);
+        update(metrics);
+      } catch (error) {
+        console.error("Error fetching data from Firebase:", error);
+      }
+    }
+  };
+  
+})();
+
+// Initialize the recruitment metrics processing
+document.addEventListener('DOMContentLoaded', function() {
+  RecruitmentMetrics.init();
+});

@@ -111,5 +111,45 @@ footer .footer-link:hover {
     opacity: 1;
   }
 }
+.metric {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6vh 5vw;
+  padding: 2vh 3vw;
+  width: 18vw;
+  height: 9vh;
+  background-color: #fff;
+  border-left: 0.4vw solid #FCB334;
+  border-radius: 1vh;
+  border-bottom: 0.1vw solid #FCB334;
+  border-top: 0.1vw solid #FCB334;
+  border-right: 0.1vw solid #FCB334;
+  transition: border-color 0.3s ease;
+}
+.metric:hover {
+  border-left: 0.4vw solid #1EBBF0;
+}
+.metric__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(51, 51, 51);
+}
+.metric__number {
+  font-size: 4vh;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.metric__text {
+  font-size: 2.6vh;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
 
 /*# sourceMappingURL=style.css.map */
