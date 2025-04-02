@@ -351,6 +351,8 @@ footer .footer-link:hover {
   border: 1px solid #FCB334;
   display: inline-block;
   vertical-align: top;
+  padding: 5%;
+  align-items: center;
 }
 
 .applications-chart__card {
