@@ -231,7 +231,7 @@ footer .footer-link:hover {
   width: 1vw;
 }
 .width-line-final p {
-  margin-top: 2rem;
+  margin-left: 6.5rem;
   color: #777;
 }
 
@@ -251,6 +251,7 @@ footer .footer-link:hover {
   border-radius: 0.4vw;
   width: 20vw;
   gap: 1vw;
+  height: 30px;
 }
 .year-filter-container .year-filter__select, .year-filter-container .job-title-filter__select, .job-title-filter-container .year-filter__select, .job-title-filter-container .job-title-filter__select {
   border: none;
@@ -261,8 +262,10 @@ footer .footer-link:hover {
 }
 
 #filterExport {
-  margin-bottom: 2%;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10%;
 }
 
 .metric {
