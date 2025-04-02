@@ -8,6 +8,14 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <title>Recruitment Analytics Dashboard</title>
 </head>
 
@@ -31,7 +39,28 @@
                     <div class="year-filter-container">
                         <i class="fas fa-calendar-alt"></i>
                         <select id="yearSelect" class="year-filter__select">
+                            <option value="all" selected>All Years</option>
                         </select>
+                    </div>
+                    <div class="job-title-filter-container">
+                        <i class="fas fa-briefcase"></i>
+                        <select id="jobFilter" class="job-title-filter__select">
+                            <option value="all" selected>All Job Titles</option>
+                        </select>
+                    </div>
+                    <button id="exportBtn">Export Data</button>
+   
+                    <div class="overlay" id="overlay"></div>
+                    <div class="export-options" id="exportOptions">
+                        <h3>Select Charts to Export</h3>
+                        <label><input type="checkbox" class="chart-checkbox" value="funnelChart"> Recruitment Funnel</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="applicationsChart"> Application Sources</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="genderChart"> Gender Ratio</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="hireTimeChart"> Time to Hire</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="ageChart"> Age of Applicants</label><br>
+                    
+                        <button id="downloadBtn">Download ZIP</button>
+                        <button id="closeBtn">Close</button>
                     </div>
                 </div>
 
@@ -195,20 +224,8 @@
                                 <h2 class="chart-title">Gender Ratio</h2>
                                 <canvas id="genderChart"></canvas>
                             </div>
-
-                            <div class="gender-chart-container gender-chart__card">
-                                <h2 class="chart-title">Gender Ratio</h2>
-                                <canvas id="genderChart"></canvas>
-                            </div>
-                            <div class="gender-chart-container gender-chart__card">
-                                <h2 class="chart-title">Gender Ratio</h2>
-                                <canvas id="genderChart"></canvas>
-                            </div>
-
-
-<!-- 
                             <canvas id="barChartDuration"></canvas>
-                            <canvas id="barChartAge"></canvas> -->
+                            <canvas id="barChartAge"></canvas>
                         </div>
 
 
@@ -235,9 +252,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="jins.js"></script>
-
+    <script src="new.js"></script>
 </body>
 
 </html>

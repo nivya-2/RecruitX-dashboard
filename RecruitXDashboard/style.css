@@ -242,23 +242,17 @@ footer .footer-link:hover {
   margin-bottom: 2rem;
 }
 
-.year-filter-container {
+.year-filter-container, .job-title-filter-container {
   display: flex;
   align-items: center;
   background: white;
   border: 0.1rem solid #ccc;
   padding: 1vh;
   border-radius: 0.4vw;
-  width: 14vw;
+  width: 20vw;
   gap: 1vw;
 }
-.year-filter-container .year-select__title {
-  display: flex;
-  gap: 0.2rem;
-  justify-content: center;
-  align-items: center;
-}
-.year-filter-container .year-filter__select {
+.year-filter-container .year-filter__select, .year-filter-container .job-title-filter__select, .job-title-filter-container .year-filter__select, .job-title-filter-container .job-title-filter__select {
   border: none;
   background: none;
   font-size: 1rem;
@@ -361,6 +355,92 @@ footer .footer-link:hover {
   background-color: #ffffff;
   border-radius: 0.75rem;
   border: 1px solid #FCB334;
+}
+
+#barChartDuration {
+  border-radius: 0.375rem;
+  padding-left: 2.175rem;
+  padding-top: 1.141rem;
+  padding-bottom: 1.141rem;
+  padding-right: 2.175rem;
+  margin-top: 5%;
+  border-color: #FCB334;
+  border-width: 0.03125rem;
+  border-style: solid;
+  width: 100%;
+  max-width: 16.4675rem;
+  max-height: 11.340625rem;
+  background-color: white;
+}
+
+#barChartAge {
+  border-radius: 0.375rem;
+  padding-left: 2.175rem;
+  padding-top: 1.141rem;
+  padding-bottom: 1.141rem;
+  padding-right: 2.175rem;
+  margin-top: 5%;
+  border-color: #FCB334;
+  border-width: 0.03125rem;
+  border-style: solid;
+  width: 100%;
+  max-width: 16.4675rem;
+  max-height: 11.340625rem;
+  background-color: white;
+}
+
+.export-options {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 1.25rem;
+  border: 0.0625rem solid #ccc;
+  z-index: 100;
+  border-radius: 0.5rem;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+#exportBtn {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 1.25rem;
+}
+
+#downloadBtn, #closeBtn {
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.625rem;
+  margin-right: 0.625rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+#closeBtn {
+  background-color: #f1f1f1;
+  border: 0.0625rem solid #ccc;
+}
+
+.filterExport {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=style.css.map */
