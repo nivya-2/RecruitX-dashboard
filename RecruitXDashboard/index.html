@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
     <script src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
     <title>Recruitment Analytics Dashboard</title>
 </head>
+
 <body>
     <header class="dashboard__header">
         <div id="header-section-title" class="dashboard__title">RecruitX</div>
@@ -27,20 +38,202 @@
         <section class="article-container">
             <div id="recruitmentAnalytics" class="article-container__section">
                 <div id="filterExport">
-
+                    <div class="year-filter-container">
+                        <i class="fas fa-calendar-alt"></i>
+                        <select id="yearSelect" class="year-filter__select">
+                            <option value="all" selected>All Years</option>
+                        </select>
+                    </div>
+                    <div class="job-title-filter-container">
+                        <i class="fas fa-briefcase"></i>
+                        <select id="jobFilter" class="job-title-filter__select">
+                            <option value="all" selected>All Job Titles</option>
+                        </select>
+                    </div>
+                    
+                    <button id="exportBtn">Export Data</button>
+                    <div class="overlay" id="overlay"></div>
+                    <div class="export-options" id="exportOptions">
+                        <h3>Select Charts to Export</h3>
+                        <label><input type="checkbox" class="chart-checkbox" value="funnelChart"> Recruitment Funnel</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="applicationsChart"> Application Sources</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="genderChart"> Gender Ratio</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="hireTimeChart"> Time to Hire</label><br>
+                        <label><input type="checkbox" class="chart-checkbox" value="ageChart"> Age of Applicants</label><br>
+                    
+                        <button id="downloadBtn">Download ZIP</button>
+                        <button id="closeBtn">Close</button>
+                    </div>
                 </div>
-                <div>
+
+                <div class="datametricCharts">
                     <div class="data-metrics">
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Total Hired
+                                </div>
+                                <div class="metric__number" id="totalHired">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Open Positions
+                                </div>
+                                <div class="metric__number" id="openPositions">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Closed Postions
+                                </div>
+                                <div class="metric__number" id="closedPositions">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Avg. Aplts per job
+                                </div>
+                                <div class="metric__number" id="applicationsPerHire">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Avg. Time to hire
+                                </div>
+                                <div class="metric__number" id="daysPerHire">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric__content">
+                                <div class="metric__text">
+                                    Offer Accept
+                                </div>
+                                <div class="metric__number" id="offerAcceptanceRate">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="charts">
+                        <div class="funnel-sources__container">
+                            <div class="funnel-chart__card">
+
+                                <div class="funnel-chart__heading">
+                                    <p>Recruitment Funnel: <br>Hiring Success Rate by Stage </p>
+                                </div>
+                                <div class="funnel-chart__container">
+                                    <div class="width-line-initial">
+                                        <p>100%</p>
+                                        <div class="vertical-lines"></div>
+                                        <div class="horizontal-line"></div>
+                                    </div>
+                                    <div class="funnel-chart-data">
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Application Recieved
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar applications-recieved "></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Applications screened
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar applications-screened"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Technical Round Completed
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar technical-round"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Management Round Completed
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar management-round"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Documents Collected
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar documents-collected"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Salary Approved
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar salary-approved"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-container">
+                                            <div class="data-heading">
+                                                Offer Accepted
+                                            </div>
+                                            <div class="graph-container">
+                                                <div class="graph-bar offer-accepted"></div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="width-line-final">
+                                    <p></p>
+                                </div>
+                            </div>
+                        
+                            <div class="application-sources-container applications-chart__card">
+                                <h2 class="chart-title"><center>Application Sources</center></h2>
+                                <canvas id="applicationsChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="gender-hireday-age__container">
+                            <div class="gender-chart-container gender-chart__card">
+                                <h2 class="chart-title"><center>Gender Ratio</center></h2>
+                                <canvas id="genderChart"></canvas>
+                            </div>
+                            <canvas id="barChartDuration"></canvas>
+                            <canvas id="barChartAge"></canvas>
+                        </div>
+
+
 
                     </div>
-                    <div class="funnel-sources__container">
-
-                    </div>
-                    <div class="gender-hireday-age__container">
-
-                    </div>
+                    
                 </div>
-                
+
             </div>
 
             <div id="jobPostings" class="hidden job__container">
@@ -86,6 +279,9 @@
         </div>
     </footer>
 
+    <script src="new.js"></script>
     <script src="script.js"></script>
+
 </body>
+
 </html>
