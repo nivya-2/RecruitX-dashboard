@@ -436,7 +436,7 @@ function renderTabulator(candidates) {
           }
       ],
       pagination: "local",
-      paginationSize: 8,
+      paginationSize: 6,
       movableColumns: true,
   });
   setupExportButtons();
