@@ -409,40 +409,129 @@ function initializeDashboard() {
         
         const downloadBtn = document.getElementById('downloadBtn');
         if (downloadBtn) {
-            downloadBtn.addEventListener('click', () => {
-                const selectedCharts = document.querySelectorAll('.chart-checkbox:checked');
+            downloadBtn.addEventListener('click', async () => {
+                const selectedCharts = Array.from(document.querySelectorAll('.chart-checkbox:checked'));
                 if (!selectedCharts.length) {
                     alert("Please select at least one chart to export");
                     return;
                 }
                 
                 const zip = new JSZip();
-                let count = 0;
+                let processedCount = 0;
+                const totalToProcess = selectedCharts.length;
                 
-                selectedCharts.forEach(checkbox => {
-                    const chartId = checkbox.value;
-                    const chart = chartInstances[chartId];
-                    
-                    if (chart) {
-                        const labels = chart.data.labels;
-                        const values = chart.data.datasets[0].data;
-                        const data = [['Category', 'Count'], ...labels.map((label, i) => [label.split(' ')[0], values[i]])];
+                // Process each selected chart
+                for (const checkbox of selectedCharts) {
+                    try {
+                        const chartId = checkbox.value;
+                        let chartData, fileName;
                         
-                        const ws = XLSX.utils.aoa_to_sheet(data);
-                        const wb = XLSX.utils.book_new();
-                        XLSX.utils.book_append_sheet(wb, ws, chartId);
-                        
-                        const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-                        zip.file(`${chartId}.xlsx`, new Blob([new Uint8Array(wbout.split('').map(c => c.charCodeAt(0)))], { type: "application/octet-stream" }));
-                        
-                        count++;
-                        if (count === selectedCharts.length) {
-                            zip.generateAsync({ type: 'blob' }).then(content => {
-                                saveAs(content, 'recruitment_data.zip');
-                            });
+                        switch(chartId) {
+                            case 'funnelChart':
+                                // Process funnel chart data
+                                const funnelStages = [
+                                    'applications-recieved',
+                                    'applications-screened',
+                                    'technical-round',
+                                    'management-round',
+                                    'documents-collected',
+                                    'salary-approved',
+                                    'offer-accepted'
+                                ];
+                                
+                                chartData = [['Stage', 'Count']];
+                                funnelStages.forEach(stage => {
+                                    const element = document.querySelector(`.graph-bar.${stage}`);
+                                    if (element) {
+                                        const count = element.dataset.count || 0;
+                                        const label = element.parentElement.parentElement.querySelector('.data-heading').textContent.trim();
+                                        chartData.push([label, parseInt(count)]);
+                                    }
+                                });
+                                fileName = 'Recruitment_Funnel';
+                                break;
+                                
+                            case 'applicationsChart':
+                                // Process application sources chart
+                                if (!chartInstances['applicationsChart']) {
+                                    console.error('Applications chart not found');
+                                    continue;
+                                }
+                                const appChart = chartInstances['applicationsChart'];
+                                chartData = [['Source', 'Count']];
+                                appChart.data.labels.forEach((label, i) => {
+                                    chartData.push([label, appChart.data.datasets[0].data[i]]);
+                                });
+                                fileName = 'Application_Sources';
+                                break;
+                                
+                            case 'genderChart':
+                                // Process gender chart
+                                if (!chartInstances['genderChart']) {
+                                    console.error('Gender chart not found');
+                                    continue;
+                                }
+                                const genderChart = chartInstances['genderChart'];
+                                chartData = [['Gender', 'Count']];
+                                genderChart.data.labels.forEach((label, i) => {
+                                    chartData.push([label, genderChart.data.datasets[0].data[i]]);
+                                });
+                                fileName = 'Gender_Ratio';
+                                break;
+                                
+                            case 'hireTimeChart':
+                                case 'ageChart':
+                                // Process bar charts (time to hire and age distribution)
+                                const barChartId = chartId === 'hireTimeChart' ? 'barChartDuration' : 'barChartAge';
+                                if (!chartInstances[barChartId]) {
+                                    console.error(`${barChartId} not found`);
+                                    continue;
+                                }
+                                const barChart = chartInstances[barChartId];
+                                const xLabel = chartId === 'hireTimeChart' ? 'Days to Hire' : 'Age Range';
+                                chartData = [[xLabel, 'Count']];
+                                barChart.data.labels.forEach((label, i) => {
+                                    chartData.push([label, barChart.data.datasets[0].data[i]]);
+                                });
+                                fileName = chartId === 'hireTimeChart' ? 'Time_to_Hire' : 'Age_Distribution';
+                                break;
+                                
+                            default:
+                                console.error(`Unknown chart type: ${chartId}`);
+                                continue;
                         }
+                        
+                        // Only proceed if we have data
+                        if (chartData && chartData.length > 1) {
+                            const ws = XLSX.utils.aoa_to_sheet(chartData);
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, fileName);
+                            
+                            const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+                            zip.file(`${fileName}.xlsx`, excelBuffer);
+                            processedCount++;
+                        }
+                    } catch (error) {
+                        console.error(`Error processing ${chartId}:`, error);
                     }
-                });
+                }
+                
+                // Only create zip if we successfully processed at least one chart
+                if (processedCount > 0) {
+                    zip.generateAsync({ type: 'blob' }).then(content => {
+                        saveAs(content, 'recruitment_data.zip');
+                        
+                        // Hide export options after download
+                        const overlay = document.getElementById('overlay');
+                        const exportOptions = document.getElementById('exportOptions');
+                        if (overlay && exportOptions) {
+                            overlay.style.display = 'none';
+                            exportOptions.style.display = 'none';
+                        }
+                    });
+                } else {
+                    alert("No valid chart data was available for export");
+                }
             });
         }
     }
